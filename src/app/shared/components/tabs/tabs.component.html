@@ -1,0 +1,14 @@
+<div class="tabs">
+  <div class="tab" routerLink="qrgenerator" [class.active]="isActive('qrgenerator')">
+    <ion-icon name="qr-code"></ion-icon>
+    <span class="tab-label">QR</span>
+  </div>
+  <div class="tab" (click)="navigate()" [class.active]="isActive('report')">
+    <ion-icon name="document"></ion-icon>
+    <span class="tab-label">Reporte</span>
+  </div>
+  <div class="tab" routerLink="Login" [class.active]="isActive('Login')">
+    <ion-icon name="power"></ion-icon>
+    <span class="tab-label">Salir</span>
+  </div>
+</div>

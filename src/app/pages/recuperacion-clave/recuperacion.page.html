@@ -1,0 +1,17 @@
+<ion-content>
+  <div class="body">
+    <div class="container">
+      <img src="../../../assets/imagenes/logo_polizaqui.jpeg" alt="PolizaAqui Logo">
+      <h1>{{ title }}</h1>
+      <form [formGroup]="formForgot">
+        <input type="email" class="input-field" placeholder="Correo electrónico" formControlName="email">
+        <app-components *ngIf="showLoading"></app-components>
+        <button type="submit" class="button" (click)="onSubmit()">Enviar</button>
+      </form>
+      <p class="message">Introduce tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña.</p>
+    </div>
+    <footer>
+      <p>&copy; 2024 PolizaAqui. Todos los derechos reservados. <a href="term-policy-dev">Términos y Condiciones</a></p>
+    </footer>
+  </div>
+</ion-content>

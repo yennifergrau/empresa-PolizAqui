@@ -1,0 +1,35 @@
+<div class="body">
+  <div class="container">
+    <img src="../../../assets/imagenes/logo_polizaqui.jpeg" alt="PolizaAqui Logo">
+    <h1>{{ title }}</h1>
+    <form [formGroup]="formLogin" (ngSubmit)="Submit()">
+      <div *ngIf="emailControl.invalid && (emailControl.dirty || emailControl.touched)" class="error-message">
+        <div *ngIf="emailControl.errors?.['required']">El campo es obligatorio*</div>
+        <div *ngIf="emailControl.errors?.['pattern']">Correo Inválido</div>
+      </div>
+      <ion-input 
+      [ngClass]="{'invalid': emailControl.invalid && (emailControl.dirty || emailControl.touched)}"
+      type="email" class="input-field" placeholder="   Correo electrónico" formControlName="email"></ion-input>
+      
+      <div *ngIf="passwordControl.invalid && (passwordControl.dirty || passwordControl.touched)" class="error-message">
+        <div *ngIf="passwordControl.errors?.['required']">El campo es obligatorio*</div>
+      </div>
+
+      <div class="input-container">
+        <ion-input
+        [ngClass]="{'invalid': passwordControl.invalid && (passwordControl.dirty || passwordControl.touched)}"
+        [type]="passwordFieldType" class="input-field" placeholder="   Contraseña" formControlName="password"></ion-input>
+        <ion-icon [name]="passwordIcon" (click)="togglePasswordVisibility()" class="eye-icon" slot="end"></ion-icon>
+      </div>
+      <app-components *ngIf="showLoading" />
+      <button type="submit" class="button" color="transparent">Iniciar Sesión</button>
+      <a class="link" (click)="RoutingNavigate()">{{ subtitle }}</a>
+    </form>
+  </div>
+  <div class="link-information">
+    <p>No tienes una cuenta <strong (click)="routingRegistro()">Registrarse</strong></p>
+  </div>
+  <footer>
+    <p>&copy; 2024 PolizaAqui. Todos los derechos reservados. <a href="term-policy-dev">Términos y Condiciones</a></p>
+  </footer>
+</div>

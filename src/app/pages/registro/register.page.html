@@ -1,0 +1,87 @@
+<ion-content Scroll-Y="true" [translate]="true">
+  <div class="body">
+    <div class="container">
+      <img src="../../../assets/imagenes/logo_polizaqui.jpeg" alt="PolizaAqui Logo">
+      <h1>{{ title }}</h1>
+      <form [formGroup]="formRegister" (ngSubmit)="Submit()">
+        <div *ngIf="rifControl.invalid && (rifControl.dirty || rifControl.touched)" class="error-message">
+          <div *ngIf="rifControl.errors?.['required']">El campo es obligatorio*</div>
+          <div *ngIf="rifControl.errors?.['pattern']">Debes agregar J/G/V/E/P al inicio y los 9 digitos numericos</div>
+        </div>
+        <ion-input
+        [ngClass]="{'input-error': rifControl.invalid && (rifControl.dirty || rifControl.touched)}"
+        type="text" class="input-field" placeholder="   RIF" formControlName="cedula_rif" appRifMask maxlength="12"></ion-input >
+  
+        <div *ngIf="nameControl.invalid && (nameControl.dirty || nameControl.touched)" class="error-message">
+          <div *ngIf="nameControl.errors?.['required']">El campo es obligatorio*</div>
+        </div>
+        <ion-input
+        [ngClass]="{'input-error': nameControl.invalid && (nameControl.dirty || nameControl.touched)}"
+        type="text" class="input-field" appUpperCaseInput placeholder="   Nombre de la Empresa" formControlName="nombre"></ion-input>
+  
+        <div *ngIf="telefonoControl.invalid && (telefonoControl.dirty || telefonoControl.touched)" class="error-message">
+          <div *ngIf="telefonoControl.errors?.['required']">El campo es obligatorio*</div>
+          <div *ngIf="telefonoControl.errors?.['pattern']">Campo inválido</div>
+        </div>
+        <ion-input
+        [ngClass]="{'input-error': telefonoControl.invalid && (telefonoControl.dirty || telefonoControl.touched)}"
+        type="text" class="input-field" placeholder="   Teléfono" appMask inputmode="numeric" maxlength="12"
+          formControlName="telefono"></ion-input>
+  
+        <div *ngIf="emailControl.invalid && (emailControl.dirty || emailControl.touched)" class="error-message">
+          <div *ngIf="emailControl.errors?.['required']">El campo es obligatorio*</div>
+          <div *ngIf="emailControl.errors?.['pattern']">Correo Inválido*</div>
+        </div>
+  
+          <ion-input type="email" class="input-field no-select" placeholder="   Correo electrónico"
+          [ngClass]="{'input-error': emailControl.invalid && (emailControl.dirty || emailControl.touched)}" 
+              oncopy="return false" 
+              oncut="return false" 
+              onpaste="return false"
+              formControlName="email"
+              [ngClass]="{'input-error': correoNoCoincide, 'input-success': correoCoincide}"
+              ></ion-input>
+  
+              <ion-input 
+              type="email" 
+              class="input-field" 
+              placeholder="   Verificar correo" 
+              (input)="verificarCoincidencia($event)"
+              [ngClass]="{'input-error': correoNoCoincide, 'input-success': correoCoincide}" />
+    
+  
+        <div *ngIf="direControl.invalid && (direControl.dirty || direControl.touched)" class="error-message">
+          <div *ngIf="direControl.errors?.['required']">El campo es obligatorio*</div>
+        </div>
+        <ion-input 
+        [ngClass]="{'input-error': direControl.invalid && (direControl.dirty || direControl.touched)}"
+        type="text" class="input-field" placeholder="   Dirección" formControlName="direccion"></ion-input>
+  
+        <div *ngIf="passwordControl.invalid && (passwordControl.dirty || passwordControl.touched)" class="error-message">
+          <div *ngIf="passwordControl.errors?.['required']">El campo es obligatorio*</div>
+        </div>
+        <div class="input-container">
+          <ion-input
+          [ngClass]="{'input-error': passwordControl.invalid && (passwordControl.dirty || passwordControl.touched)}"
+          [type]="passwordFieldType" class="input-field" placeholder="   Contraseña" formControlName="password"></ion-input>
+          <ion-icon [name]="passwordIcon" (click)="togglePasswordVisibility()" class="eye-icon" slot="end"></ion-icon>
+        </div>
+  
+        <div class="checkbox-container">
+          <input type="checkbox" id="terms" (change)="toggleTerms($event)">
+          <label for="terms">
+            Acepto los <a href="term-policy-dev">términos y condiciones</a>
+          </label>
+        </div>
+        <app-components *ngIf="showLoading"></app-components>
+        <button type="submit" class="button" >Registrarse</button>
+      </form>
+      <div class="link-information">
+        ¿Ya eres miembro? <strong (click)="routingInicio()">Iniciar sesión</strong>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <p>&copy; 2024 PolizaAqui. Todos los derechos reservados. <a href="term-policy-dev">Términos y Condiciones</a></p>
+  </footer>
+</ion-content>

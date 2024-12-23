@@ -1,0 +1,58 @@
+<ion-content Scroll-Y="true" [translate]="true">
+  <div class="body">
+
+    <div class="container">
+        <div class="image-container">
+            <img src="../../../assets/imagenes/logo_polizaqui.jpeg" alt="PolizaAqui Logo">
+          </div>
+          <h1>Ventas</h1>
+        <div class="filters">
+           
+            <ion-input type="date" [(ngModel)]="selectedDateInitial"   placeholder="   Fecha-inicio" /> <ion-icon name="created" slot="end" color="primary"></ion-icon>
+            <ion-input type="date"  [(ngModel)]="selectedDateFinaly"  placeholder="   Fecha-fin" />
+
+            <button onclick="filterSales()">Filtrar</button>
+        </div>
+
+
+        <ion-grid class="tabla">
+            <ion-row class="encabezado">
+                <ion-col class="text-center2"> Poliza </ion-col>
+                <ion-col class="text-center2"> Monto </ion-col>
+                <ion-col class="text-center2"> Estatus </ion-col>
+                <ion-col class="text-center2">Acciones</ion-col>
+            </ion-row>
+            @for(reporte of filteredItems;track $index){
+                <ng-container>
+                    <ion-row class="datos">
+                        <ion-col class="text-center nombre-reporte" title="{{ reporte.id_poliza | lowercase }}">{{reporte.id_poliza}}</ion-col>
+                        <ion-col class="text-center">{{reporte.monto_pago}} BS</ion-col>
+                        <ion-col class="text-center">PAGADA</ion-col>
+                        <ion-col >
+                            <button (click)="toggleDetalles(reporte)" class="button-round">
+                                {{ reporte.mostrarDetalles ? '-' : '+' }}
+                            </button>
+                        </ion-col>
+                    </ion-row>
+                    @if(reporte.mostrarDetalles){
+                        <ion-row class="detalle">
+                            <ion-col size="12" class="text-center">
+                                <ion-list lines="none" class="list">
+                                    <ion-item><strong>Fecha Registro:</strong> {{reporte.fecha_emision | date:'dd/MM/yyyy'}} </ion-item>
+                                    <ion-item><strong>Plan:</strong>{{reporte.plan}}</ion-item>
+                                    <ion-item><strong>Comision:</strong>5%</ion-item>
+                                </ion-list>
+                            </ion-col>
+                        </ion-row>
+                    }        
+                </ng-container>
+            }
+        </ion-grid>
+    </div>
+    <div class="footer-botton">
+        <footer>
+          <p>&copy; 2024 PolizAqui. Todos los derechos reservados. <a href="term-policy-dev">Términos y Condiciones</a></p>
+        </footer>
+      </div>
+  </div>
+</ion-content>
